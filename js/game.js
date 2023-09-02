@@ -14,6 +14,8 @@
       computer: 5,
     }
 
+    const arr = [];
+
     return function startGame() {
     // for (let i = 0; i)
 
@@ -35,6 +37,7 @@
       console.log(newUserNum);
 
       if (Number.isNaN(newUserNum)) {
+        arr.push(newUserNum);
         startGame();
       }
 
