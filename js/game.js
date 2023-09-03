@@ -14,79 +14,54 @@
       computer: 5,
     }
 
-    const arr = [];
-
     return function startGame() {
-    // for (let i = 0; i)
 
       const userNum = prompt(`Введите число от 1 до ${check.player}`);
       console.log(`Число игрок ${userNum}`);
 
       if (userNum === null) {
         if (confirm('Хотите завершить?')) {
+          alert(`Игрок: ${check.player} Компьютер: ${check.computer}`);
           return;
         }
-      } else if (userNum === '') {
-        alert('Строка пустая');
-        startGame();
-      } else if (userNum === 0) {
-        alert('Символов не достаточно');
-      }
-
-      const newUserNum = parseInt(userNum);
-      console.log(newUserNum);
-
-      if (Number.isNaN(newUserNum)) {
-        arr.push(newUserNum);
-        startGame();
-      }
-
-      console.log(newUserNum)
-
-      if (newUserNum === NaN) {
-        return;
       }
 
       const randNum = getRandomIntInclusive(2, 3);
       console.log(`Число рандом: ${randNum}`);
 
-      if (newUserNum % randNum) {
+      const newUserNum = parseInt(userNum);
+
+      if (!Number.isNaN(newUserNum) && typeof newUserNum === 'number' && newUserNum % randNum) {
         check.computer += newUserNum;
         check.player -= newUserNum;
-      } else {
+        if (check.player === 0) {
+          alert('Вы проиграли');
+          if (confirm('Хотите повторить?')) {
+            check.player = 5;
+            check.computer = 5;
+          } else {
+            return;
+          }
+        }
+      } else if (!Number.isNaN(newUserNum) && typeof newUserNum === 'number' && !(newUserNum % randNum)) {
         check.player += newUserNum;
         check.computer -= newUserNum;
-      }
+        if (check.computer === 0) {
+          alert('Вы победили');
+          if (confirm('Хотите повторить?')) {
+            check.player = 5;
+            check.computer = 5;
+          } else {
+            return;
+          }
+        }  
+      } 
 
-      console.log(`Игрок: ${check.player} Компьютер: ${check.computer}`);
+      
 
-      if (check.player === 0) {
-        alert('Вы проиграли');
-        if (confirm('Хотите повторить?')) {
-          check.player = 5;
-          check.computer = 5;
-          startGame();
-        } else {
-          return;
-        }
-      }
-
-      if (check.computer === 0) {
-        alert('Вы победили');
-        if (confirm('Хотите повторить?')) {
-          check.player = 5;
-          check.computer = 5;
-          startGame();
-        } else {
-          return;
-        }
-      }  
-
-      startGame();
-
+      return startGame();
     }
   }
-
   window.MARB = game;
 
 })();
