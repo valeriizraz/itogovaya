@@ -21,8 +21,18 @@
 
       if (userNum === null) {
         if (confirm('Хотите завершить?')) {
-          alert(`Игрок: ${check.player} Компьютер: ${check.computer}`);
-          return;
+          if (check.player === check.computer) {
+            alert(`Ничья со счетом: player ${check.player} computer ${check.computer}`);
+            return;
+          }
+          if (check.player > check.computer) {
+            alert(`Вы выиграли со счетом: player ${check.player} computer ${check.computer}`);
+            return;
+          }
+          if (check.player < check.computer) {
+            alert(`Вы проиграли со счетом: player ${check.player} computer ${check.computer}`);
+            return;
+          }
         }
       }
 
